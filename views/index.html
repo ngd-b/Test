@@ -48,9 +48,59 @@
 </head>
 <div class="container">
     <div class="header" id="header">
-
+        <dl>
+            <dt class='date'>10月30日/星期二</dt>
+            <dt class='time'>14:16</dt>
+            <dt>晴</dt>
+            <dt>25<sup>~</sup>17°</dt>
+        </dl>
     </div>
     <div class="main" id="main">
+        <div class="item">
+            <div class="head">
+                <dl>
+                    <dt class="routeName">202路</dt>
+                    <dt>距本站</dt>
+                    <dt class="waitRoutes"><span>7</span>站</dt>
+                </dl>
+            </div>
+            <div class="body">
+                <p>冬季：6:00 - 22:00</p>
+            </div>
+            <div class="foot">
+                <p class="waitTime">预计到达时间<span>19</span>分钟</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="head">
+                <dl>
+                    <dt class="routeName">234路</dt>
+                    <dt>距本站</dt>
+                    <dt class="waitRoutes"><span>3</span>站</dt>
+                </dl>
+            </div>
+            <div class="body">
+                <p>冬季：5:30 - 22:00</p>
+            </div>
+            <div class="foot">
+                <p class="waitTime">预计到达时间<span>13</span>分钟</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="head">
+                <dl>
+                    <dt class="routeName">134路</dt>
+                    <dt>距本站</dt>
+                    <dt class="waitRoutes"><span>10</span>站</dt>
+                </dl>
+            </div>
+            <div class="body">
+                <p>冬季：5:00 - 21:30</p>
+            </div>
+            <div class="foot">
+                <p class="waitTime">预计到达时间<span>32</span>分钟</p>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -93,8 +143,48 @@
         //     p1.updateRoute();
         //     p2.updateRoute();
         // }, 10000);
+        var items = $("#main").find('.item');
+        // one
+        var waitRoutesNode0 = $(items[0]).find(".waitRoutes").find('span');
+        var waitTimeNode0 = $(items[0]).find(".waitTime").find('span');
+        // two
+        var waitRoutesNode1 = $(items[1]).find(".waitRoutes").find('span');
+        var waitTimeNode1 = $(items[1]).find(".waitTime").find('span');
+        // three
+        var waitRoutesNode2 = $(items[2]).find(".waitRoutes").find('span');
+        var waitTimeNode2 = $(items[2]).find(".waitTime").find('span');
+        setInterval(function () {
+            updateTime(util.dateFormat());
 
-        $("#header").html('<p>hello World</p>');
+            updatedRoute(0, waitRoutesNode0[0], waitTimeNode0[0]);
+            updatedRoute(1, waitRoutesNode1[0], waitTimeNode1[0]);
+            updatedRoute(2, waitRoutesNode2[0], waitTimeNode2[0]);
+        }, 10000);
+        function updateTime(data) {
+            var date = $("#header").find('.date');
+            date[0].innerText = data.date;
+            var time = $("#header").find('.time');
+            time[0].innerText = data.time;
+        }
+        function updatedRoute(flag, dom1, dom2) {
+            var index = Number(flag);
+            var item = {};
+            item.waitRoutes = Number($(dom1).text());
+            item.waitTime = Number($(dom2).text());
+            console.log(item);
+            if (item.waitTime > 1) {
+                item.waitTime--;
+            } else {
+                item.waitRoutes = Math.round(Math.random() * 10) + 2;
+                item.waitTime = item.waitRoutes * 3;
+            }
+            if (item.waitRoutes * 3 > item.waitTime) {
+                item.waitRoutes--;
+            }
+            console.log(item);
+            $(dom1).text(item.waitRoutes);
+            $(dom2).text(item.waitTime);
+        }
     });
 
 
