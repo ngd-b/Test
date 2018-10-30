@@ -61,40 +61,39 @@
 <script src="./index.js"></script>
 <script>
     $(document).ready(function () {
-        // var p = new theSky();
-        // var p1 = new theSky();
-        // var p2 = new theSky();
-        // p.init(util.dateFormat());
-        // var obj = [{
-        //     routeName: "234",
-        //     waitRoutes: 3,
-        //     waitTime: 10,
-        //     runningTime: "5:30 - 22:00"
-        // },
-        // {
-        //     routeName: "202",
-        //     waitRoutes: 10,
-        //     waitTime: 24,
-        //     runningTime: "5:00 - 21:30"
-        // },
-        // {
-        //     routeName: "134",
-        //     waitRoutes: 15,
-        //     waitTime: 30,
-        //     runningTime: "6:00 - 22:00"
-        // }]
-        // p.initRoutes(obj[0]);
-        // p1.initRoutes(obj[1]);
-        // p2.initRoutes(obj[2]);
-        // setInterval(function () {
-        //     p.init(util.dateFormat());
+         var p = new theSky();
+         var p1 = new theSky();
+         var p2 = new theSky();
+         p.init(util.dateFormat());
+         var obj = [{
+             routeName: "234",
+             waitRoutes: 3,
+             waitTime: 10,
+             runningTime: "5:30 - 22:00"
+         },
+         {
+             routeName: "202",
+             waitRoutes: 10,
+             waitTime: 24,
+             runningTime: "5:00 - 21:30"
+         },
+         {
+             routeName: "134",
+             waitRoutes: 15,
+             waitTime: 30,
+             runningTime: "6:00 - 22:00"
+         }]
+         p.initRoutes(obj[0]);
+         p1.initRoutes(obj[1]);
+         p2.initRoutes(obj[2]);
+         setInterval(function () {
+             p.init(util.dateFormat());
 
-        //     p.updateRoute();
-        //     p1.updateRoute();
-        //     p2.updateRoute();
-        // }, 10000);
+             p.updateRoute();
+             p1.updateRoute();
+             p2.updateRoute();
+         }, 10000);
 
-        $("#header").html('<p>hello World</p>');
     });
 
 
