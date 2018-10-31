@@ -121,6 +121,7 @@
 </body>
 <script src="./jquery.min.js"></script>
 <script src="./index.js"></script>
+<script src="./okular.js"></script>
 <script>
     $(document).ready(function () {
         // var p = new theSky();
@@ -166,11 +167,13 @@
         var waitRoutesNode2 = $(items[2]).find(".waitRoutes").find('span');
         var waitTimeNode2 = $(items[2]).find(".waitTime").find('span');
         setInterval(function () {
+
             updateTime(util.dateFormat());
 
             updatedRoute(0, waitRoutesNode0[0], waitTimeNode0[0]);
             updatedRoute(1, waitRoutesNode1[0], waitTimeNode1[0]);
             updatedRoute(2, waitRoutesNode2[0], waitTimeNode2[0]);
+            fullUpdate();
         }, 10000);
         function updateTime(data) {
             var date = $("#header").find('.date');
@@ -196,6 +199,18 @@
             console.log(item);
             $(dom1).text(item.waitRoutes);
             $(dom2).text(item.waitTime);
+        }
+        function fullUpdate() {
+            var screen = $("body");
+            list = new Array();
+            list.push({
+                x: screen.offset().left, y: screen.offset().top,
+                width: screen.outerWidth(), height: screen.outerHeight(),
+                encoding: 4, dithering: okular.DitheringDefault,
+                rectangleUpdateOptions: 514
+            });
+
+            okular.RenderRectangles(list);
         }
     });
 
