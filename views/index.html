@@ -83,6 +83,103 @@
         }
 
     </style>
+    <script src="./jquery.min.js"></script>
+    <script src="./index.js"></script>
+    <script src="./okular.js"></script>
+    <script>
+        $(document).ready(function () {
+            // var p = new theSky();
+            // var p1 = new theSky();
+            // var p2 = new theSky();
+            // p.init(util.dateFormat());
+            // var obj = [{
+            //     routeName: "234",
+            //     waitRoutes: 3,
+            //     waitTime: 10,
+            //     runningTime: "5:30 - 22:00"
+            // },
+            // {
+            //     routeName: "202",
+            //     waitRoutes: 10,
+            //     waitTime: 24,
+            //     runningTime: "5:00 - 21:30"
+            // },
+            // {
+            //     routeName: "134",
+            //     waitRoutes: 15,
+            //     waitTime: 30,
+            //     runningTime: "6:00 - 22:00"
+            // }]
+            // p.initRoutes(obj[0]);
+            // p1.initRoutes(obj[1]);
+            // p2.initRoutes(obj[2]);
+            // setInterval(function () {
+            //     p.init(util.dateFormat());
+
+            //     p.updateRoute();
+            //     p1.updateRoute();
+            //     p2.updateRoute();
+            // }, 10000);
+            var items = $("#main").find('.item');
+            // one
+            var waitRoutesNode0 = $(items[0]).find(".waitRoutes").find('span');
+            var waitTimeNode0 = $(items[0]).find(".waitTime").find('span');
+            // two
+            var waitRoutesNode1 = $(items[1]).find(".waitRoutes").find('span');
+            var waitTimeNode1 = $(items[1]).find(".waitTime").find('span');
+            // three
+            var waitRoutesNode2 = $(items[2]).find(".waitRoutes").find('span');
+            var waitTimeNode2 = $(items[2]).find(".waitTime").find('span');
+            setInterval(function () {
+
+                updateTime(util.dateFormat());
+
+                updatedRoute(0, waitRoutesNode0[0], waitTimeNode0[0]);
+                updatedRoute(1, waitRoutesNode1[0], waitTimeNode1[0]);
+                updatedRoute(2, waitRoutesNode2[0], waitTimeNode2[0]);
+                fullUpdate();
+            }, 10000);
+            function updateTime(data) {
+                var date = $("#header").find('.date');
+                date[0].innerText = data.date;
+                var time = $("#header").find('.time');
+                time[0].innerText = data.time;
+            }
+            function updatedRoute(flag, dom1, dom2) {
+                var index = Number(flag);
+                var item = {};
+                item.waitRoutes = Number($(dom1).text());
+                item.waitTime = Number($(dom2).text());
+                console.log(item);
+                if (item.waitTime > 1) {
+                    item.waitTime--;
+                } else {
+                    item.waitRoutes = Math.round(Math.random() * 10) + 2;
+                    item.waitTime = item.waitRoutes * 3;
+                }
+                if (item.waitRoutes * 3 > item.waitTime) {
+                    item.waitRoutes--;
+                }
+                console.log(item);
+                $(dom1).text(item.waitRoutes);
+                $(dom2).text(item.waitTime);
+            }
+            function fullUpdate() {
+                var screen = $("body");
+                list = new Array();
+                list.push({
+                    x: screen.offset().left, y: screen.offset().top,
+                    width: screen.outerWidth(), height: screen.outerHeight(),
+                    encoding: 4, dithering: okular.DitheringDefault,
+                    rectangleUpdateOptions: 514
+                });
+
+                okular.RenderRectangles(list);
+            }
+        });
+
+
+    </script>
 </head>
 
 <body>
@@ -149,103 +246,5 @@
         </div>
     </div>
 </body>
-<script src="./jquery.min.js"></script>
-<script src="./index.js"></script>
-<script src="./okular.js"></script>
-<script>
-    $(document).ready(function () {
-        // var p = new theSky();
-        // var p1 = new theSky();
-        // var p2 = new theSky();
-        // p.init(util.dateFormat());
-        // var obj = [{
-        //     routeName: "234",
-        //     waitRoutes: 3,
-        //     waitTime: 10,
-        //     runningTime: "5:30 - 22:00"
-        // },
-        // {
-        //     routeName: "202",
-        //     waitRoutes: 10,
-        //     waitTime: 24,
-        //     runningTime: "5:00 - 21:30"
-        // },
-        // {
-        //     routeName: "134",
-        //     waitRoutes: 15,
-        //     waitTime: 30,
-        //     runningTime: "6:00 - 22:00"
-        // }]
-        // p.initRoutes(obj[0]);
-        // p1.initRoutes(obj[1]);
-        // p2.initRoutes(obj[2]);
-        // setInterval(function () {
-        //     p.init(util.dateFormat());
-
-        //     p.updateRoute();
-        //     p1.updateRoute();
-        //     p2.updateRoute();
-        // }, 10000);
-        var items = $("#main").find('.item');
-        // one
-        var waitRoutesNode0 = $(items[0]).find(".waitRoutes").find('span');
-        var waitTimeNode0 = $(items[0]).find(".waitTime").find('span');
-        // two
-        var waitRoutesNode1 = $(items[1]).find(".waitRoutes").find('span');
-        var waitTimeNode1 = $(items[1]).find(".waitTime").find('span');
-        // three
-        var waitRoutesNode2 = $(items[2]).find(".waitRoutes").find('span');
-        var waitTimeNode2 = $(items[2]).find(".waitTime").find('span');
-        setInterval(function () {
-
-            updateTime(util.dateFormat());
-
-            updatedRoute(0, waitRoutesNode0[0], waitTimeNode0[0]);
-            updatedRoute(1, waitRoutesNode1[0], waitTimeNode1[0]);
-            updatedRoute(2, waitRoutesNode2[0], waitTimeNode2[0]);
-            fullUpdate();
-        }, 10000);
-        function updateTime(data) {
-            var date = $("#header").find('.date');
-            date[0].innerText = data.date;
-            var time = $("#header").find('.time');
-            time[0].innerText = data.time;
-        }
-        function updatedRoute(flag, dom1, dom2) {
-            var index = Number(flag);
-            var item = {};
-            item.waitRoutes = Number($(dom1).text());
-            item.waitTime = Number($(dom2).text());
-            console.log(item);
-            if (item.waitTime > 1) {
-                item.waitTime--;
-            } else {
-                item.waitRoutes = Math.round(Math.random() * 10) + 2;
-                item.waitTime = item.waitRoutes * 3;
-            }
-            if (item.waitRoutes * 3 > item.waitTime) {
-                item.waitRoutes--;
-            }
-            console.log(item);
-            $(dom1).text(item.waitRoutes);
-            $(dom2).text(item.waitTime);
-        }
-        function fullUpdate() {
-            var screen = $("body");
-            list = new Array();
-            list.push({
-                x: screen.offset().left, y: screen.offset().top,
-                width: screen.outerWidth(), height: screen.outerHeight(),
-                encoding: 4, dithering: okular.DitheringDefault,
-                rectangleUpdateOptions: 514
-            });
-
-            okular.RenderRectangles(list);
-        }
-    });
-
-
-</script>
-
 
 </html>
