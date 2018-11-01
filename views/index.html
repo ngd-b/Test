@@ -87,46 +87,15 @@
     <script src="./index.js"></script>
     <script src="./okular.js"></script>
     <script>
-        // var p = new theSky();
-        // var p1 = new theSky();
-        // var p2 = new theSky();
-        // p.init(util.dateFormat());
-        // var obj = [{
-        //     routeName: "234",
-        //     waitRoutes: 3,
-        //     waitTime: 10,
-        //     runningTime: "5:30 - 22:00"
-        // },
-        // {
-        //     routeName: "202",
-        //     waitRoutes: 10,
-        //     waitTime: 24,
-        //     runningTime: "5:00 - 21:30"
-        // },
-        // {
-        //     routeName: "134",
-        //     waitRoutes: 15,
-        //     waitTime: 30,
-        //     runningTime: "6:00 - 22:00"
-        // }]
-        // p.initRoutes(obj[0]);
-        // p1.initRoutes(obj[1]);
-        // p2.initRoutes(obj[2]);
-        // setInterval(function () {
-        //     p.init(util.dateFormat());
 
-        //     p.updateRoute();
-        //     p1.updateRoute();
-        //     p2.updateRoute();
-        // }, 10000);
-        updateTime(util.dateFormat());
+        updateTime(dateFormat());
         var items = $("#main").find('.item');
         // one
         var waitRoutesNode0 = $(items[0]).find(".waitRoutes").find('span');
         var waitTimeNode0 = $(items[0]).find(".waitTime").find('span');
         let router0 = Math.round(Math.random() * 10 + 3);
         $(waitRoutesNode0).text(router0);
-        $(waitTimeNode0).text(router0 * 2);
+        $(waitTimeNode0).text(router0 * 3);
         // two
         var waitRoutesNode1 = $(items[1]).find(".waitRoutes").find('span');
         var waitTimeNode1 = $(items[1]).find(".waitTime").find('span');
@@ -138,16 +107,63 @@
         var waitTimeNode2 = $(items[2]).find(".waitTime").find('span');
         let router2 = Math.round(Math.random() * 10 + 3);
         $(waitRoutesNode2).text(router2);
-        $(waitTimeNode2).text(router2 * 4);
+        $(waitTimeNode2).text(router2 * 3);
         setInterval(function () {
-
             updateTime(util.dateFormat());
 
             updatedRoute(0, waitRoutesNode0[0], waitTimeNode0[0]);
             updatedRoute(1, waitRoutesNode1[0], waitTimeNode1[0]);
             updatedRoute(2, waitRoutesNode2[0], waitTimeNode2[0]);
-            fullUpdate();
         }, 10000);
+        function dateFormat() {
+            let date = new Date();
+            // 日期
+            let month = date.getMonth() + 1;
+            if (month < 10) {
+                month = "0" + month;
+            }
+            let day = date.getDate();
+            if (day < 10) {
+                day = "0" + day;
+            }
+            let week = date.getDay();
+            // 换算周几
+            switch (week) {
+                case 0:
+                    week = "星期日";
+                    break;
+                case 1:
+                    week = "星期一";
+                    break;
+                case 2:
+                    week = "星期二";
+                    break;
+                case 3:
+                    week = "星期三";
+                    break;
+                case 4:
+                    week = "星期四";
+                    break;
+                case 5:
+                    week = "星期五";
+                    break;
+                case 6:
+                    week = "星期六";
+                    break;
+            }
+            let hour = date.getHours();
+            if (hour < 10) {
+                hour = "0" + hour;
+            }
+            let minute = date.getMinutes();
+            if (minute < 10) {
+                minute = "0" + minute;
+            }
+            return {
+                date: month + "月" + day + "日/" + week,
+                time: hour + ":" + minute
+            };
+        }
         function updateTime(data) {
             var date = $("#header").find('.date');
             date[0].innerText = data.date;
@@ -172,18 +188,6 @@
             console.log(item);
             $(dom1).text(item.waitRoutes);
             $(dom2).text(item.waitTime);
-        }
-        function fullUpdate() {
-            var screen = $("body");
-            list = new Array();
-            list.push({
-                x: screen.offset().left, y: screen.offset().top,
-                width: screen.outerWidth(), height: screen.outerHeight(),
-                encoding: 4, dithering: okular.DitheringDefault,
-                rectangleUpdateOptions: 514
-            });
-
-            okular.RenderRectangles(list);
         }
     </script>
 </head>
