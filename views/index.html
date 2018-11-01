@@ -124,12 +124,21 @@
             // one
             var waitRoutesNode0 = $(items[0]).find(".waitRoutes").find('span');
             var waitTimeNode0 = $(items[0]).find(".waitTime").find('span');
+            let router0 = Math.round(Math.random() * 10 + 3);
+            $(waitRoutesNode0).text(router0);
+            $(waitTimeNode0).text(router0 * 3);
             // two
             var waitRoutesNode1 = $(items[1]).find(".waitRoutes").find('span');
             var waitTimeNode1 = $(items[1]).find(".waitTime").find('span');
+            let router1 = Math.round(Math.random() * 10 + 3);
+            $(waitRoutesNode1).text(router1);
+            $(waitTimeNode1).text(router1 * 3);
             // three
             var waitRoutesNode2 = $(items[2]).find(".waitRoutes").find('span');
             var waitTimeNode2 = $(items[2]).find(".waitTime").find('span');
+            let router2 = Math.round(Math.random() * 10 + 3);
+            $(waitRoutesNode2).text(router2);
+            $(waitTimeNode2).text(router2 * 3);
             setInterval(function () {
 
                 updateTime(util.dateFormat());
@@ -198,14 +207,14 @@
                     <dl>
                         <dt class="routeName">512路</dt>
                         <dt>距本站</dt>
-                        <dt class="waitRoutes"><span>7</span>站</dt>
+                        <dt class="waitRoutes"><span></span>站</dt>
                     </dl>
                 </div>
                 <div class="body">
                     <p>冬季：6:00 - 22:00</p>
                 </div>
                 <div class="foot">
-                    <p class="waitTime">预计到达时间<span>19</span>分钟</p>
+                    <p class="waitTime">预计到达时间<span></span>分钟</p>
                 </div>
             </div>
             <div class="item">
@@ -213,14 +222,14 @@
                     <dl>
                         <dt class="routeName">7路</dt>
                         <dt>距本站</dt>
-                        <dt class="waitRoutes"><span>3</span>站</dt>
+                        <dt class="waitRoutes"><span></span>站</dt>
                     </dl>
                 </div>
                 <div class="body">
                     <p>冬季：5:30 - 22:00</p>
                 </div>
                 <div class="foot">
-                    <p class="waitTime">预计到达时间<span>13</span>分钟</p>
+                    <p class="waitTime">预计到达时间<span></span>分钟</p>
                 </div>
             </div>
             <div class="item">
@@ -228,14 +237,14 @@
                     <dl>
                         <dt class="routeName">109路</dt>
                         <dt>距本站</dt>
-                        <dt class="waitRoutes"><span>10</span>站</dt>
+                        <dt class="waitRoutes"><span></span>站</dt>
                     </dl>
                 </div>
                 <div class="body">
                     <p>冬季：5:00 - 21:30</p>
                 </div>
                 <div class="foot">
-                    <p class="waitTime">预计到达时间<span>32</span>分钟</p>
+                    <p class="waitTime">预计到达时间<span></span>分钟</p>
                 </div>
             </div>
             <div class="item" style="text-align: center;">
