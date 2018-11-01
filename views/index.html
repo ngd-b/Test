@@ -127,7 +127,7 @@
             var waitTimeNode0 = $(items[0]).find(".waitTime").find('span');
             let router0 = Math.round(Math.random() * 10 + 3);
             $(waitRoutesNode0).text(router0);
-            $(waitTimeNode0).text(router0 * 3);
+            $(waitTimeNode0).text(router0 * 2);
             // two
             var waitRoutesNode1 = $(items[1]).find(".waitRoutes").find('span');
             var waitTimeNode1 = $(items[1]).find(".waitTime").find('span');
@@ -139,7 +139,7 @@
             var waitTimeNode2 = $(items[2]).find(".waitTime").find('span');
             let router2 = Math.round(Math.random() * 10 + 3);
             $(waitRoutesNode2).text(router2);
-            $(waitTimeNode2).text(router2 * 3);
+            $(waitTimeNode2).text(router2 * 4);
             setInterval(function () {
 
                 updateTime(util.dateFormat());
